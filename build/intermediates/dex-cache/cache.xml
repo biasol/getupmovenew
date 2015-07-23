@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7ff613bf78ab057293892fdbd4169eda899c89b9">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-099b47797bbf68dc6f00a63e045b7e5b0abce883.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0e8228b4bc69c6a2c8d7c18498a77e53417d2574">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-df6598e90d98c2775f71ff4b4f0cd9239e980dec.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3033cc3a2c68dff3e5b646d6d084bdbdf7d00b25">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-f2c43f46d17f8b40155d03c2d0af277190de2105.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c976518693e89ad44fbfccfc654941eaec198d08">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-d60b5d172e1f0b73ef64cf7821b8bba762765c5f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-39ec891c5afebf31b7a0eecd64138cc59950c453.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4cd0b093824b3228fffc21ea369b98d0b1db6566">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-6d7c3111b6701cbc6adc0a84c4d3d0a9bcec2bdc.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e3d791b42eaa90416cd0b2d2e608092794a3baa4">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-88eb529773733e7e6d6d3b100ecc94443a244cad.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9224bc4c54ba95147c7eabd874573763c07cb6be">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-0ff28583791414e011707a1bf66f563ee3470454.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a96b762bde4139de855735f175ec4d17dca55a6d">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-a31a65b07dfe7de0dcda492390db97e5a738186d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1c5a76debf0c2857ccad422c4a80ed785982f8df">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-20fb514de9e303b0467cb9b64d5732aebfca8f74.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-b14894d4e101d11f0021269fa84941f27d042d0f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="29fd6d3794b71491c2789708cd8d03c71feb8954">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-a228e7dcad3af8a5b44324ca62641399ec35e847.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="73ccb92b70112f2e463e415ef8d7275de7da6516">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-c57db1a8fff8755b52b21d4d89c7d3d307e71bb6.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4c93d99d454c975536bbe3b42283eee847f03ea3">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-d7f5a8629865ae6130da2f247da22f10dd706def.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="055783146ba9654a725442563be78cad303aad1f">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-5a8e9b37c1cf764e989fca1e0eb3b825d0ccb3f8.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-60fc26e399fcff9da1f139ce7d2ac639184bc422.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a08d65794b844d8e7540bf9a33859bf3b2482d7f">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-0808a863450e5f390ddcfa78663fcb91e0b940d1.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="41b3870cbe5fa546d8095b5b89d42cb69f3dd175">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-0e27e9cb54b6eb7441389d905919f95dae58fbc4.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3c0b099f9de16b265ecd6122fcb603e7d0d29f90">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-54dcafc1b65d9d257e43ab626f4bfdbb4476a767.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ef5f051e7308febe289dc93c67c5f32785b4260a">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-ad9b7c5197c626c524ef88c3f3d15c5aa1b329c2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="17f8750d5c0749e44dd7c54aa390d9c937803825">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-3a76b2543852a100b4c1026cd5ddc470fca147d2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fb04b12526b0073c7fb1ebb70c5842d82ee95596">
+        <dex dex="C:\Users\Dan\AndroidStudioProjects\GetUpMove\app\build\intermediates\pre-dexed\debug\classes-23040ff900fe78d3da1c7881ab75ffe8d83f70d7.jar" />
+    </item>
+
+</items>
