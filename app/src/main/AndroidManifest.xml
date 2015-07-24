@@ -5,11 +5,14 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="19"
         android:targetSdkVersion="22" />
+    <uses-feature
+        android:name="@string/step_detector" android:required="false"/>
 
-    <meta-data android:name="com.google.android.gms.version"
-        android:value="@integer/google_play_services_version" />
+    <uses-feature
+        android:name="@string/step_counter" android:required="false"/>
+
 
     <application
         android:allowBackup="true"

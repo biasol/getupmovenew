@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GetUpMove.iml" filepath="$PROJECT_DIR$/GetUpMove.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/getupmovenew.iml" filepath="$PROJECT_DIR$/getupmovenew.iml" />
     </modules>
   </component>
 </project>
