@@ -1,244 +1,223 @@
 package com.bilosciotti.getupmove;
 
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.fitness.Fitness;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
-import com.google.android.gms.fitness.RecordingApi;
-import com.google.android.gms.fitness.SensorsApi;
+import com.google.android.gms.fitness.FitnessStatusCodes;
+import com.google.android.gms.fitness.data.DataPoint;
 import com.google.android.gms.fitness.data.DataSource;
 import com.google.android.gms.fitness.data.DataType;
-import com.google.android.gms.fitness.data.Subscription;
+import com.google.android.gms.fitness.data.Field;
+import com.google.android.gms.fitness.data.Value;
 import com.google.android.gms.fitness.request.DataSourcesRequest;
 import com.google.android.gms.fitness.request.OnDataPointListener;
 import com.google.android.gms.fitness.request.SensorRequest;
 import com.google.android.gms.fitness.result.DataSourcesResult;
-import com.google.android.gms.fitness.result.ListSubscriptionsResult;
 
-public class MainActivity extends Activity implements RecordingApi, SensorsApi{
+import java.util.concurrent.TimeUnit;
 
+
+public class MainActivity extends Activity
+        implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+
+    private static final String TAG = "FitActivity";
+    //[START Auth_Variable_References]
     private static final int REQUEST_OAUTH = 1;
-
-    /**
-     * Track whether an authorization activity is stacking over the current activity, i.e. when
-     * a known auth error is being resolved, such as showing the account chooser or presenting a
-     * consent dialog. This avoids common duplications as might happen on screen rotations, etc.
-     */
-    private static final String AUTH_PENDING = "auth_state_pending";
-    private boolean authInProgress = false;
-    public static final String TAG = "Connecting";
-
+    // [END auth_variable_references]
     private GoogleApiClient mClient = null;
 
+    int mInitialNumberOfSteps = 0;
+    private TextView mStepsTextView;
+    private boolean mFirstCount = true;
 
+    // Create Builder View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        if (savedInstanceState != null) {
-            authInProgress = savedInstanceState.getBoolean(AUTH_PENDING);
-        }
-
-        buildFitnessClient();
+        mStepsTextView = (TextView) findViewById(R.id.tv);
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+    private void connectFitness() {
+        Log.i(TAG, "Connecting...");
 
-    /**
-     *  Build a {@link GoogleApiClient} that will authenticate the user and allow the application
-     *  to connect to Fitness APIs. The scopes included should match the scopes your app needs
-     *  (see documentation for details). Authentication will occasionally fail intentionally,
-     *  and in those cases, there will be a known resolution, which the OnConnectionFailedListener()
-     *  can address. Examples of this include the user never having signed in before, or having
-     *  multiple accounts on the device and needing to specify which account to use, etc.
-     */
-    private void buildFitnessClient() {
         // Create the Google API Client
         mClient = new GoogleApiClient.Builder(this)
+                // select the Fitness API
                 .addApi(Fitness.SENSORS_API)
+                .addApi(Fitness.SESSIONS_API)
+                .addApi(Fitness.RECORDING_API)
+                        // specify the scopes of access
+                .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ))
                 .addScope(new Scope(Scopes.FITNESS_LOCATION_READ))
-                .addConnectionCallbacks(
-                        new GoogleApiClient.ConnectionCallbacks() {
-
-                            @Override
-                            public void onConnected(Bundle bundle) {
-                                Log.i(TAG, "Connected!!!");
-                                // Now you can make calls to the Fitness APIs.
-                                // Put application specific code here.
-
-                            }
-
-
-
-                            @Override
-                            public void onConnectionSuspended(int i) {
-                                // If your connection to the sensor gets lost at some point,
-                                // you'll be able to determine the reason and react to it here.
-                                if (i == ConnectionCallbacks.CAUSE_NETWORK_LOST) {
-                                    Log.i(TAG, "Connection lost.  Cause: Network Lost.");
-                                } else if (i == ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED) {
-                                    Log.i(TAG, "Connection lost.  Reason: Service Disconnected");
-                                }
-                            }
-                        }
-                )
-                .addOnConnectionFailedListener(
-                        new GoogleApiClient.OnConnectionFailedListener() {
-                            // Called whenever the API client fails to connect.
-                            @Override
-                            public void onConnectionFailed(ConnectionResult result) {
-                                Log.i(TAG, "Connection failed. Cause: " + result.toString());
-                                if (!result.hasResolution()) {
-                                    // Show the localized error dialog
-                                    GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(),
-                                            MainActivity.this, 0).show();
-                                    return;
-                                }
-                                // The failure has a resolution. Resolve it.
-                                // Called typically when the app is not yet authorized, and an
-                                // authorization dialog is displayed to the user.
-                                if (!authInProgress) {
-                                    try {
-                                        Log.i(TAG, "Attempting to resolve failed connection");
-                                        authInProgress = true;
-                                        result.startResolutionForResult(MainActivity.this,
-                                                REQUEST_OAUTH);
-                                    } catch (IntentSender.SendIntentException e) {
-                                        Log.e(TAG,
-                                                "Exception while starting resolution activity", e);
-                                    }
-                                }
-                            }
-                        }
-                )
+                .addScope(new Scope(Scopes.FITNESS_BODY_READ_WRITE))
+                        // provide callbacks
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
                 .build();
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // Connect to the Fitness API
-        Log.i(TAG, "Connecting...");
+        // Connect the Google API client
         mClient.connect();
     }
 
+    // Manage OAuth authentication
     @Override
-    protected void onStop() {
-        super.onStop();
-        if (mClient.isConnected()) {
-            mClient.disconnect();
+    public void onConnectionFailed(ConnectionResult result) {
+
+        // Error while connecting. Try to resolve using the pending intent returned.
+        if (result.getErrorCode() == ConnectionResult.SIGN_IN_REQUIRED ||
+                result.getErrorCode() == FitnessStatusCodes.NEEDS_OAUTH_PERMISSIONS) {
+            try {
+                // Request authentication
+                result.startResolutionForResult(this, REQUEST_OAUTH);
+            } catch (IntentSender.SendIntentException e) {
+                Log.e(TAG, "Exception connecting to the fitness service", e);
+            }
+        } else {
+            Log.e(TAG, "Unknown connection issue. Code = " + result.getErrorCode());
         }
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_OAUTH) {
-            authInProgress = false;
             if (resultCode == RESULT_OK) {
-                // Make sure the app is not already connected or attempting to connect
-                if (!mClient.isConnecting() && !mClient.isConnected()) {
-                    mClient.connect();
-                }
+                // If the user authenticated, try to connect again
+                mClient.connect();
             }
         }
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(AUTH_PENDING, authInProgress);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+    public void onConnectionSuspended(int i) {
+        // If your connection gets lost at some point,
+        // you'll be able to determine the reason and react to it here.
+        if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST) {
+            Log.i(TAG, "Connection lost.  Cause: Network Lost.");
+        } else if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED) {
+            Log.i(TAG, "Connection lost.  Reason: Service Disconnected");
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public PendingResult<Status> subscribe(GoogleApiClient googleApiClient, DataType dataType) {
-        return null;
+    public void onConnected(Bundle bundle) {
+
+        Log.i(TAG, "Connected!");
+
+        // Now you can make calls to the Fitness APIs.
+        invokeFitnessAPIs();
+
     }
 
-    @Override
-    public PendingResult<Status> subscribe(GoogleApiClient googleApiClient, DataSource dataSource) {
-        return null;
+    private void invokeFitnessAPIs() {
+
+        // Create a listener object to be called when new data is available
+        OnDataPointListener listener = new OnDataPointListener() {
+            @Override
+            public void onDataPoint(DataPoint dataPoint) {
+
+                for (Field field : dataPoint.getDataType().getFields()) {
+                    Value val = dataPoint.getValue(field);
+                    updateTextViewWithStepCounter(val.asInt());
+                }
+            }
+        };
+
+        //Specify what data sources to return
+        DataSourcesRequest req = new DataSourcesRequest.Builder()
+                .setDataSourceTypes(DataSource.TYPE_DERIVED)
+                .setDataTypes(DataType.TYPE_STEP_COUNT_DELTA)
+                .build();
+
+        //  Invoke the Sensors API with:
+        // - The Google API client object
+        // - The data sources request object
+        PendingResult<DataSourcesResult> pendingResult =
+                Fitness.SensorsApi.findDataSources(mClient, req);
+
+        //  Build a sensor registration request object
+        SensorRequest sensorRequest = new SensorRequest.Builder()
+                .setDataType(DataType.TYPE_STEP_COUNT_CUMULATIVE)
+                .setSamplingRate(1, TimeUnit.SECONDS)
+                .build();
+
+        //  Invoke the Sensors API with:
+        // - The Google API client object
+        // - The sensor registration request object
+        // - The listener object
+        PendingResult<Status> regResult =
+                Fitness.SensorsApi.add(mClient,
+                        new SensorRequest.Builder()
+                                .setDataType(DataType.TYPE_STEP_COUNT_DELTA)
+                                .build(),
+                        listener);
+
+
+        // 4. Check the result asynchronously
+        regResult.setResultCallback(new ResultCallback<Status>()
+        {
+            @Override
+            public void onResult(Status status) {
+                if (status.isSuccess()) {
+                    Log.d(TAG, "listener registered");
+                    // listener registered
+                } else {
+                    Log.d(TAG, "listener not registered");
+                    // listener not registered
+                }
+            }
+        });
     }
 
-    @Override
-    public PendingResult<Status> unsubscribe(GoogleApiClient googleApiClient, DataType dataType) {
-        return null;
+    // Update the Text Viewer with Counter of Steps..
+    private void updateTextViewWithStepCounter(final int numberOfSteps) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getBaseContext(), "On Datapoint!", Toast.LENGTH_SHORT);
+
+                if(mFirstCount && (numberOfSteps != 0)) {
+                    mInitialNumberOfSteps = numberOfSteps;
+                    mFirstCount = false;
+                }
+                if(mStepsTextView != null){
+                    mStepsTextView.setText(String.valueOf(numberOfSteps - mInitialNumberOfSteps));
+                }
+            }
+        });
     }
 
+    //Start
     @Override
-    public PendingResult<Status> unsubscribe(GoogleApiClient googleApiClient, DataSource dataSource) {
-        return null;
+    protected void onStart() {
+        super.onStart();
+        mFirstCount = true;
+        mInitialNumberOfSteps = 0;
+        if (mClient == null || !mClient.isConnected()) {
+            connectFitness();
+        }
+    }
+    //Stop
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mClient.isConnected() || mClient.isConnecting()) mClient.disconnect();
+        mInitialNumberOfSteps = 0;
+        mFirstCount = true;
     }
 
-    @Override
-    public PendingResult<Status> unsubscribe(GoogleApiClient googleApiClient, Subscription subscription) {
-        return null;
-    }
-
-    @Override
-    public PendingResult<ListSubscriptionsResult> listSubscriptions(GoogleApiClient googleApiClient) {
-        return null;
-    }
-
-    @Override
-    public PendingResult<ListSubscriptionsResult> listSubscriptions(GoogleApiClient googleApiClient, DataType dataType) {
-        return null;
-    }
-
-    @Override
-    public PendingResult<DataSourcesResult> findDataSources(GoogleApiClient googleApiClient, DataSourcesRequest dataSourcesRequest) {
-        return null;
-    }
-
-    @Override
-    public PendingResult<Status> add(GoogleApiClient googleApiClient, SensorRequest sensorRequest, OnDataPointListener onDataPointListener) {
-        return null;
-    }
-
-    @Override
-    public PendingResult<Status> add(GoogleApiClient googleApiClient, SensorRequest sensorRequest, PendingIntent pendingIntent) {
-        return null;
-    }
-
-    @Override
-    public PendingResult<Status> remove(GoogleApiClient googleApiClient, OnDataPointListener onDataPointListener) {
-        return null;
-    }
-
-    @Override
-    public PendingResult<Status> remove(GoogleApiClient googleApiClient, PendingIntent pendingIntent) {
-        return null;
-    }
 }
